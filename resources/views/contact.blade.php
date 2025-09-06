@@ -1,6 +1,6 @@
 <x-layout title="Contact">
 
-<li>name: Moayed Altater</li>
+<li>Name: Moayed Altater</li>
 
 <li>Email: moayed@example.com</li>
 

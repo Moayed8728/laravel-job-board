@@ -1,4 +1,4 @@
-<x-layout title="Home">
+<x-layout >
     
 <h1>Welcome To MO Space</h1>
 
