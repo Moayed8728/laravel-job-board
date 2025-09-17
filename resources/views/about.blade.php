@@ -1,4 +1,4 @@
-<x-layout title="About">
+<x-layout title="About Page">
     
 <li>Hi, I’m Moayed — a Software Engineering student at Universiti Teknologi Malaysia (UTM) with a 
           

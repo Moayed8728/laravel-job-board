@@ -2,58 +2,73 @@
 
 namespace App\Http\Controllers;
 
-
-use App\Models\Tag;
-use App\Models\Post;
 use Illuminate\Http\Request;
-
+use App\Models\Tag;
 class TagController extends Controller
 {
-    function index(){
-        $data = Tag::all();
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+         $data = Tag::cursorPaginate(5);
     
-        return view('tag.index',['tags' => $data,"pageTitle" => "Tags" ]);
+        return view('tag.index',['tags' => $data,'pageTitle' => 'Tags' ]);
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        
+        Tag::factory(10)->create();
+        return view('tag.create',['pageTitle' => 'Tags'  ]);
+
+         
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        $tag = Tag::findOrFail($id);
+        return view('tag.show',['tag'=> $tag,'pageTitle' => 'view tag' ]);
     
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+         $tag = Tag::findOrFail($id);
+        return view('tag.edit',['tag'=> $tag,'pageTitle'=> 'Edit tag']);
     
-    function create(){
-        Tag::create(    [
-            'title' => 'CSS',
-        ]);
+    }
 
-        return redirect('/tags');
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
 }
-
-function testManyToMany(){
-
-//     $post1 = Post::find(1);
-//     $post2 = Post::find(2);
-
-//     $post1->tags()->attach([1,2]);
-//     $post2->tags()->attach([1]);
-
-//     return response()->json([
-//         'post1' => $post1->tags,
-//         'post2' => $post2->tags
-//     ]
-//     );
-
-$tag = Tag::find(2);
-$tag->posts()->attach( [2] );
-
-return response()->json([
-    'tag'=> $tag->title,
-    'posts'=> $tag->posts
-    ]);
-}
-
-
-
-
-}
-
-
-
-
-

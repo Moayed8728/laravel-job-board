@@ -7,4 +7,6 @@
     
 
 @endforeach
+
+{{ $tags->links() }}
 </x-layout>
