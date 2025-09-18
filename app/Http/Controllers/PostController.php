@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BlogPostRequest;
 use Illuminate\Http\Request;
 use App\Models\Post;
 
@@ -12,7 +13,7 @@ class PostController extends Controller
      */
     public function index()
     {
-         $data = Post::cursorPaginate(5);
+         $data = Post::latest()->paginate(15);
     
         return view('post.index',['posts' => $data,"pageTitle" => "Blog"  ]);
     
@@ -32,9 +33,18 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BlogPostRequest $request)
     {
-        //@todo 3a08dd10-697f-46fb-bffa-e24a8301daf9
+        $post = new Post();
+        $post->title = $request->input('title');
+        $post->author = $request->input('author');
+        $post->body = $request->input('body');
+        $post->published = $request->has('published');
+        
+        $post->save();
+        
+        return redirect('/blog')->with('success','Post created successfully!');
+       
     }
 
     /**
@@ -53,16 +63,23 @@ class PostController extends Controller
     public function edit(string $id)
     {
         $post = Post::findOrFail($id);
-        return view('post.edit',['post'=> $post,'pageTitle'=> 'Edit Post']);
+        return view('post.edit',['post'=> $post,'pageTitle'=> 'Edit Post: '.$post->title ]);
     
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(BlogPostRequest $request, string $id)
     {
-        //@todo
+        $post = Post::findOrFail($id);
+        $post->title = $request->input('title');
+        $post->author = $request->input('author');  
+        $post->body = $request->input('body');
+        $post->published = $request->has('published');
+
+        $post->save();
+        return redirect('/blog')->with('success','Post updated successfully!');
     }
 
     /**
@@ -70,6 +87,8 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        //@todo
+        $post = Post::findOrFail($id);
+        $post->delete();
+        return redirect('/blog')->with('success','Post deleted successfully!');
     }
 }
