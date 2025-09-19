@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\IndexController;
@@ -19,13 +20,30 @@ Route::get('/job',[JobController::class,'index']);
 
 
 Route::resource('blog', PostController::class);
-Route::resource('comments', CommentController::class);
 Route::resource('tags', TagController::class);
 
 
+Route::get('/signup',[AuthController::class,'showSignupForm']);
+Route::get('/login',[AuthController::class,'showLoginForm']);
+
+Route::post('/signup',[AuthController::class,'signup'])->name('signup');
+Route::post('/login',[AuthController::class,'login'])->name('login');
+Route::post('/logout',[AuthController::class,'logout']);
 
 
+Route::middleware('auth')-> group(function () {
+    
+    Route::resource('blog', PostController::class);
+    Route::resource('comments', CommentController::class);
 
+
+});
+
+Route::middleware('onlyMe')->group(function () {
+
+    Route::get('/about', AboutController::class); 
+
+});
 
 
 
