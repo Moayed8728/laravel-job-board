@@ -14,7 +14,7 @@ class OnlyMe
         if (auth()->check()){
             $user = auth()->user();
 
-            if ($user->email == 'aa@a.com') {
+            if ($user->email == 'aaa@a.com') {
                 return $next($request);
             } 
         
