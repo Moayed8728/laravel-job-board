@@ -21,10 +21,7 @@ Route::prefix('v1')->group(function () {
 });
 
 
-// use Illuminate\Support\Facades\Route;
-// use App\Http\Controllers\PostController;
-// use App\Http\Controllers\TagController;
-// use App\Http\Controllers\CommentController;
+
 
 
 // Route::post('/blog',[PostController::class,'create']);

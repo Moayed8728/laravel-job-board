@@ -41,16 +41,19 @@
         <div class="hidden md:block">
           <div class="ml-4 flex items-center md:ml-6">
             
-          @auth
-          <span class="text-white mr-4">{{ Auth::user()->name }}</span>
-          <form method="POST" action="/logout" class="inline">
-            @csrf
-            <button type="submit" class="text-gray-300 hover:bg-white-700 hover:text-white px-2.5">Logout</button>
-          @else
-          <a href="/signup" class="text-gray-300 hover:bg-gray-700 hover:text-white px-2.5">Signup</a>
-            <a href="/login" class="text-gray-300 hover:bg-gray-700 hover:text-white px-2.5">Login</a>
-          
-          @endauth
+         @auth
+    <span class="text-white mr-4">{{ Auth::user()->name }}</span>
+    <form method="POST" action="/logout" class="inline">
+        @csrf
+        <button type="submit" class="text-gray-300 hover:bg-gray-700 hover:text-white px-2.5">
+            Logout
+        </button>
+    </form>
+@else
+    <a href="/signup" class="text-gray-300 hover:bg-gray-700 hover:text-white px-2.5">Signup</a>
+    <a href="/login" class="text-gray-300 hover:bg-gray-700 hover:text-white px-2.5">Login</a>
+@endauth
+
 
           </div>
           </div>

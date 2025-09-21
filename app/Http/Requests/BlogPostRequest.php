@@ -15,14 +15,14 @@ class BlogPostRequest extends FormRequest
     {
         return [
             'title' => "bail|required|max:255|unique:post,title,{$this->input('id')}",
-            'author' => 'required',
+            //'author' => 'required',
             'body'=> 'required'
         ];
     }
     public function messages(){
         return [
             'title.required'=> 'mandatory field',
-            'author.required'=> 'mandatory field',
+            //'author.required'=> 'mandatory field',
             'body.required'=> 'mandatory field'
           ];
     }
