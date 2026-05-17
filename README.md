@@ -296,7 +296,7 @@ It reflects the ability to design and implement maintainable backend systems usi
 
 # 👨‍💻 Developer
 
-**Mohammed Alttater**
+**Moayed Mohamed**
 
 - Backend Developer
 - Laravel Developer
